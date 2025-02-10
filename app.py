@@ -8,7 +8,6 @@ print('server servinggg')
 
 
 sample_data =  [ {
-    'id': 1,
     'type': 'ai',
     'content': "Hola. Dime mas sobre tus comidas favoritas? Que te gusta mas y porque? "
   }
@@ -26,15 +25,19 @@ def new_conversation():
 @app.route('/add_response',  methods=['GET', 'POST'])
 def add_response():
   print('REQUEST RECEIVED FOR ADD RESPONSE')
-  # time.sleep(1)
+  time.sleep(1)
   print('DONE')
   resp = {
       "ai_response":"Verdaaaaad??? Dime masssss!!!",
-      "feedback": "like TBH ur response is like so horrible lol"
+      "feedback": "like TBH ur response is like so horrible lol",
+      "key_words": "Agora: now. \n Nao: no. \n San Q: thanks babe"
   }
 
   # Handle POST request data here
-  return jsonify({'status': 'success', 'results': resp})
+  return jsonify({
+      'status': 'success',
+      'results': resp
+  })
 
 
 if __name__ == '__main__':

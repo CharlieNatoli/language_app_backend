@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -41,17 +42,19 @@ sample_data =  [ {
 
 @app.route('/new_conversation',  methods=['GET', 'POST'])
 def new_conversation():
-  print('REQUEST RECEIVED')
+  print('REQUEST RECEIVED - SLEEPING')
+  time.sleep(1)
+  print('DONE')
   # Handle POST request data here
   return jsonify({'status': 'success', 'convo': sample_data})
 
 
+@app.route('/add_response',  methods=['GET', 'POST'])
+def add_response():
+  print('REQUEST RECEIVED')
+  # Handle POST request data here
+  return jsonify({'status': 'success', 'convo': sample_data})
 
-@app.route('/test_cors',  methods=['GET'])
-def test_cors():
-  print('cors test')
-  print('cors test')
-  return 'CORS test'
 
 if __name__ == '__main__':
   app.run(debug=True, port=5000)

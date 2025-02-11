@@ -13,13 +13,13 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/new_topic", methods=["GET"])
+@app.route("/new_topic", methods=["POST"])
 @cross_origin()
 def new_topic():
-    language = "Spanish"
+    language = request.json.get("language")
     new_topic = start_new_topic(language)
 
-    new_words = get_new_words([], new_topic)
+    new_words = get_new_words([], new_topic, language)
     response = make_response(
         {"status": "success", "new_topic": new_topic, "key_words": new_words}
     )
@@ -30,9 +30,10 @@ def new_topic():
 @app.route("/submit_answer", methods=["POST"])
 def submit_answer():
     conversation = request.json.get("conversation")
-    response = submit_answer_to_ai(conversation)
-    new_words = get_new_words(conversation, response)
-    feedback = get_feedback(conversation)
+    language = request.json.get("language")
+    response = submit_answer_to_ai(conversation, language)
+    new_words = get_new_words(conversation, response, language)
+    feedback = get_feedback(conversation, language)
 
     resp = {"ai_response": response, "feedback": feedback, "key_words": new_words}
 

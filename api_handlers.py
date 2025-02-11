@@ -20,7 +20,7 @@ CLIENT = anthropic.Anthropic(
 )
 
 
-def start_new_topic(language="Spanish"):
+def start_new_topic(language):
     topics = "\n".join(random.sample(QUESTION_TYPES, 2))
     topics = topics.format(language=language)
     prompt_full = START_NEW_TOPIC_SYSTEM.format(language=language, topics=topics)
@@ -43,7 +43,7 @@ def _reformat_conversation_for_claude(conversation):
     ]
 
 
-def submit_answer_to_ai(conversation, language="Spanish"):
+def submit_answer_to_ai(conversation, language):
     conversation_for_claude = _reformat_conversation_for_claude(conversation)
 
     message = CLIENT.messages.create(
@@ -57,7 +57,7 @@ def submit_answer_to_ai(conversation, language="Spanish"):
     return message.content[0].text
 
 
-def get_feedback(conversation, language="Spanish"):
+def get_feedback(conversation, language):
     conversation_for_claude = _reformat_conversation_for_claude(conversation)
 
     message = CLIENT.messages.create(
@@ -71,7 +71,7 @@ def get_feedback(conversation, language="Spanish"):
     return json.loads(message.content[0].text)
 
 
-def get_new_words(conversation, response, language="Spanish"):
+def get_new_words(conversation, response, language):
     conversation_for_claude = _reformat_conversation_for_claude(conversation)
 
     conversation_for_claude_as_str = "\n".join(

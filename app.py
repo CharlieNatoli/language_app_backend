@@ -12,8 +12,14 @@ CORS(app)
 def new_conversation_api():
     language= "Spanish"
     new_conversation = start_new_conversation(language)
-    response = make_response({'status': 'success', 'new_conversation': new_conversation})
 
+    new_words = get_new_words([], new_conversation)
+    response = make_response({
+        'status': 'success',
+        'new_conversation': new_conversation,
+        'key_words': new_words
+
+    })
 
     return response
 

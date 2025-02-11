@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 
-from api_handlers import start_new_conversation, continue_conversation
+from api_handlers import start_new_conversation, continue_conversation, get_feedback, get_new_words
 import time
 
 app = Flask(__name__)
@@ -24,15 +24,14 @@ def continue_conversation_api():
     print('REQUEST RECEIVED FOR CONTINUE CONVO')
     print("conversation", conversation)
     response = continue_conversation(conversation)
+    new_words = get_new_words(conversation, response)
+    feedback = get_feedback(conversation)
     print('DONE')
+
     resp = {
       "ai_response":response,
-      "feedback": """
-        Style:: could work on XYZ
-        Word Choice:: the word \" blah\" does not work here
-        Grammar:: you use of the Pluperfect subjunctive text is groovy here
-      """ ,
-      "key_words": "Agora: now. \n Nao: no. \n San Q: thanks babe"
+      "feedback": feedback,
+      "key_words": new_words
     }
 
     # Handle POST request data here

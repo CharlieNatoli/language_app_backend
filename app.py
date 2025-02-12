@@ -7,7 +7,6 @@ from api_handlers import (
     get_feedback,
     get_new_words,
 )
-import time
 
 app = Flask(__name__)
 CORS(app)
@@ -37,7 +36,6 @@ def submit_answer():
 
     resp = {"ai_response": response, "feedback": feedback, "key_words": new_words}
 
-    # Handle POST request data here
     return jsonify({"status": "success", "results": resp})
 
 

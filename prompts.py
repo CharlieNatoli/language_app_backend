@@ -19,7 +19,7 @@ This question should be interesting and intermediate/advanced. For example, some
 
 {topics}
 
-Don't simply repeat these topics, but use them as a guide for the difficulty level we're looking for. Be creative.
+Don't simply repeat these topics, but come up with other topics of a similar difficulty level. Be creative.
 Always ask your questions in {language}. Your question should be friendly, and be 1-2 sentences.
 Respond with just the question and nothing else: 
 """
